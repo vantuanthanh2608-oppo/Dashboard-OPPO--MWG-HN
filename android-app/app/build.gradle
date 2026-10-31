@@ -11,15 +11,16 @@ android {
         applicationId 'com.oppohn.dieuhanh'
         minSdk 21
         targetSdk 34
-        versionCode (System.getenv('APP_VERSION_CODE') ?: '1').toInteger()
-        versionName (System.getenv('APP_VERSION_NAME') ?: '1.0')
+        versionCode = Integer.parseInt(System.getenv('APP_VERSION_CODE') ?: '1')
+        versionName = (System.getenv('APP_VERSION_NAME') ?: '1.0')
         resValue 'string', 'appName', 'OPPO HN'
         resValue 'string', 'launcherName', 'OPPO HN'
         resValue 'string', 'launchUrl', START
         resValue 'string', 'hostName', HOST
         resValue 'string', 'providerAuthority', 'com.oppohn.dieuhanh.fileprovider'
+        // dấu " phải viết \" trong tài nguyên Android
         resValue 'string', 'assetStatements',
-            '[{ "relation": ["delegate_permission/common.handle_all_urls"], "target": {"namespace": "web", "site": "https://' + HOST + '"}}]'
+            ('[{ "relation": ["delegate_permission/common.handle_all_urls"], "target": {"namespace": "web", "site": "https://' + HOST + '"}}]').replace('"', '\\"')
         manifestPlaceholders = [hostName: HOST]
     }
     buildTypes {
